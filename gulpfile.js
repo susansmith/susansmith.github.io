@@ -20,6 +20,27 @@ gulp.task('zipcss', function() {
 });
 
 
+//Gzip big js files
+gulp.task('zipjs', function() {
+    gulp.src('../src/js/*.js')
+    .pipe(gzip())
+    .pipe(gulp.dest('./js'));
+    gulp.src('../src/views/js/*.js')
+    .pipe(gzip())
+    .pipe(gulp.dest('./views/js'));
+});
+
+//Gzip big js files
+gulp.task('zipimage', function() {
+    gulp.src('../src/img/*.jpg')
+    .pipe(gzip())
+    .pipe(gulp.dest('./img'));
+    gulp.src('../src/views/images/*.jpg')
+    .pipe(gzip())
+    .pipe(gulp.dest('./views/images'));
+});
+
+
 // Optimize other Images
 gulp.task('images', function(cb) {
     gulp.src(['../src/img/*.png','../src/img/*.gif','../src/img/*.jpg']).pipe(imageop({
@@ -76,7 +97,13 @@ gulp.task('watch', function() {
     gulp.watch('../src/**/*.css', ['minify-css']);
     gulp.watch('../src/*.html', ['minify-html']);
     gulp.watch(['../src/**/*.jpg','../src/**/*.gif','../src/**/*.jpeg'], ['images']);
+    gulp.watch('../src/img/*.*', ['gzip']);
+    gulp.watch('../src/views/images/*.*', ['gzip']);
+    gulp.watch('../src/css/*.*', ['gzip']);
+    gulp.watch('../src/views/css/*.*', ['gzip']);
+    gulp.watch('../src/js/*.*', ['gzip']);
+    gulp.watch('../src/views/js/*.*', ['gzip']);
 });
 
 //Default Task
-gulp.task('default', ['minify-css', 'minify-html', 'compress', 'zipcss','images']);
+gulp.task('default', ['minify-css','minify-html','compress','zipcss','zipjs','images','zipimage']);
