@@ -10,13 +10,19 @@ var uglify = require('gulp-uglify');
 var gzip = require('gulp-gzip');
 
 //Gzip Big CSS Files
-gulp.task('zipcss', function() {
+gulp.task('zipit', function() {
     gulp.src('../src/css/*.css')
     .pipe(gzip())
     .pipe(gulp.dest('./css'));
     gulp.src('../src/views/css/*.css')
     .pipe(gzip())
     .pipe(gulp.dest('./views/css'));
+    gulp.src('../src/js/*.js')
+    .pipe(gzip())
+    .pipe(gulp.dest('./js'));
+    gulp.src('../src/views/js/*.js')
+    .pipe(gzip())
+    .pipe(gulp.dest('./views/js'))
 });
 
 
@@ -79,4 +85,4 @@ gulp.task('watch', function() {
 });
 
 //Default Task
-gulp.task('default', ['minify-css', 'minify-html', 'compress', 'zipcss','images']);
+gulp.task('default', ['minify-css', 'minify-html', 'compress', 'zipit','images']);
