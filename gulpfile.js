@@ -9,19 +9,21 @@ var minifyHTML = require('gulp-minify-html');
 var uglify = require('gulp-uglify');
 
 
-// Optimize Images
+// Optimize other Images
 gulp.task('images', function(cb) {
-    gulp.src(['../src/img/*.png','../src/img/*.jpg','../src/img/*.gif','../src/img/*.jpeg']).pipe(imageop({
-        optimizationLevel: 5,
-        progressive: true,
-        interlaced: true
+    gulp.src(['../src/img/*.png','../src/img/*.gif','../src/img/*.jpg']).pipe(imageop({
+        optimizationLevel: 1,
+        progressive: false,
+        interlaced: false
     })).pipe(gulp.dest('./img')).on('end', cb).on('error', cb);
-    gulp.src(['../src/views/images/*.png','../src/views/images/*.jpg','../src/views/images/*.gif','../src/views/images/*.jpeg']).pipe(imageop({
-        optimizationLevel: 5,
-        progressive: true,
-        interlaced: true
+    gulp.src(['../src/views/images/*.png','../src/views/images/*.gif','../src/views/images/*.jpg']).pipe(imageop({
+        optimizationLevel: 1,
+        progressive: false,
+        interlaced: false
     })).pipe(gulp.dest('./views/images')).on('end', cb).on('error', cb);
 });
+
+
 
 // Minify CSS
 gulp.task('minify-css', function() {
@@ -59,10 +61,10 @@ gulp.task('compress', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('../src/js/*.js', ['compress']);
-    gulp.watch('../src/css/*.css', ['minify-css']);
+    gulp.watch('../src/**/*.js', ['compress']);
+    gulp.watch('../src/**/*.css', ['minify-css']);
     gulp.watch('../src/*.html', ['minify-html']);
-    gulp.watch(['../src/img/*.png','../src/img/*.jpg','../src/img/*.gif','../src/img/*.jpeg'], ['images']);
+    gulp.watch(['../src/**/*.jpg','../src/**/*.gif','../src/**/*.jpeg'], ['images']);
 });
 
 //Default Task
