@@ -71,12 +71,12 @@ gulp.task('minify-css', function() {
 // Minify HTML
 gulp.task('minify-html', function() {
     var opts = {comments:true,spare:true};
-     gulp.src('../src/*.html')
+     gulp.src('./src/*.html')
       .pipe(minifyHTML(opts))
       .pipe(gulp.dest('./'));
     gulp.src('../src/views/*.html')
       .pipe(minifyHTML(opts))
-      .pipe(gulp.dest('./'))
+      .pipe(gulp.dest('./views'))
 });
 
 
