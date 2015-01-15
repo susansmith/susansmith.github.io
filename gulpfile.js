@@ -7,6 +7,17 @@ var imageop = require('gulp-image-optimization');
 var minifyCSS = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
 var uglify = require('gulp-uglify');
+var gzip = require('gulp-gzip');
+
+//Gzip Big CSS Files
+gulp.task('zipcss', function() {
+    gulp.src('../src/css/*.css')
+    .pipe(gzip())
+    .pipe(gulp.dest('./css'));
+    gulp.src('../src/views/css/*.css')
+    .pipe(gzip())
+    .pipe(gulp.dest('./views/css'));
+});
 
 
 // Optimize other Images
@@ -68,4 +79,4 @@ gulp.task('watch', function() {
 });
 
 //Default Task
-gulp.task('default', ['compress', 'minify-css', 'minify-html', 'images']);
+gulp.task('default', ['zipcss','compress', 'minify-css', 'minify-html', 'images']);
