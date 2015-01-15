@@ -12,17 +12,12 @@ var gzip = require('gulp-gzip');
 //Gzip Big CSS Files
 gulp.task('zipit', function() {
     gulp.src('../src/css/*.css')
-    .pipe(gzip())
-    .pipe(gulp.dest('./css'));
+      .pipe(gzip())
+      .pipe(gulp.dest('./css'));
     gulp.src('../src/views/css/*.css')
-    .pipe(gzip())
-    .pipe(gulp.dest('./views/css'));
-    gulp.src('../src/js/*.js')
-    .pipe(gzip())
-    .pipe(gulp.dest('./js'));
-    gulp.src('../src/views/js/*.js')
-    .pipe(gzip())
-    .pipe(gulp.dest('./views/js'))
+      .pipe(gzip())
+      .pipe(gulp.dest('./views/css'));
+
 });
 
 
